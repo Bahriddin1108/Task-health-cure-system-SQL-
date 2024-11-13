@@ -1,0 +1,228 @@
+<%-include('../views/layouts/main.ejs')%>
+
+<%-include('../views/layouts/navbar.ejs')%>
+
+
+<section id="appointment" class="appointment section">
+    <!-- Registration section start -->
+    <div class="container section-title mt-3 " id="registrate" data-aos="fade-up">
+        <h2>Registrate</h2>
+        <p>Registrate your personal information</p>
+      
+     
+    </div><!-- Registration Section finish -->
+
+
+    <!-- Registration alert start -->
+        <div class="row">
+        <div class="col-4"></div>
+       
+          
+        <%if(!message&&(checker==='Create')){%>
+          <div class="alert alert-danger text-center col-4" role="alert">
+            User is already registrated
+            </div>
+          <%}%>
+           
+          <div class="col-4"></div>
+      </div><!-- Registration Section finish -->
+
+
+    <!-- Registration form start -->
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <form action="/add" method="post" role="form" class="php-email-form">
+          <div class="row">
+          
+            <div class="col-md-4 form-group">
+              <input type="text" name="name" pattern="^[A-Z][a-z]+ [A-Z][a-z]+$"  title="Please name: Firstname Lastname form" class="form-control" id="name" placeholder="Your Name" required="" value="<%=oldInput.name%>">
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="number" class="form-control" name="age" id="age" placeholder="Your Age" required="" value="<%=oldInput.age%>">
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0" >
+              <input type="text" name="passport_id" pattern="[A-Z]{2}[0-9]{7}" title="Please enter AA0000000 this form" 
+              class="form-control" id="passport_id" placeholder="Your Passport id" required="" value="<%=oldInput.passport_id%>">
+            </div>
+            
+          </div>
+  
+          <div class="row">
+            <div class="col-md-4 form-group mt-3  text-center">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="" value="<%=oldInput.email%>">
+            </div>
+            <div class="col-md-4 form-group mt-3" >
+              <input type="text" name="address" pattern="[A-Za-z]+"  title="Please enter text" class="form-control" id="address" placeholder="Your Address" required="" value="<%=oldInput.address%>">
+            </div>
+            <div class="col-md-4 form-group mt-3 ">
+              <input type="phone" class="form-control" name="phone" pattern="^\+[0-9]{12}$"  title="Please enter +998 99 999 99 99 this form"  
+              id="phone" placeholder="Your Phone" required="" value="<%=oldInput.phone%>">
+            </div>
+            
+          </div>
+  
+          <div class="row">
+            <div class="col-4 container mt-3">
+              <select name="enums" id="enums" class="form-select" required="">
+                <option value="">Enum</option>
+                 <%  for (let i = 0; i < enums.length; i++) {%>            
+                <option value="<%=enums[i].e_name%>"><%=enums[i].e_name%></option>
+                <%}%>
+              </select>
+            </div>
+          </div>
+  
+          <div class="text-center mt-3">
+        <button  type="submit">Registrate User </button>
+                    </div>
+          
+          
+        </form>
+  
+      </div><!-- Registration form finish -->
+  
+     
+    <!-- Update section start -->  
+      <div class="container section-title mt-3" id="update" data-aos="fade-up">  
+
+        <h2>Update</h2>
+        <p>Your personal information are edited with according to your passport id. Please enter registrated your passport id</p>
+        </div>
+    <!-- Update section finish -->
+
+
+    <!-- Update alert start -->  
+    <div class="row">
+        <div class="col-4"></div>
+        <%if(!message&&(checker==='Update')){%>
+          <div class="alert alert-danger text-center col-4" role="alert">
+            User not found
+            </div>
+          <%}%>
+           
+          <div class="col-4"></div>
+      </div>
+
+    <!-- Update alert finish -->
+
+    <!-- Update form start -->  
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+          <form action="/editUserPage" method="post" role="form" class="php-email-form">
+               
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="text" name="name" class="form-control" id="name" pattern="^[A-Z][a-z]+ [A-Z][a-z]+$" 
+                 title="Please name: Firstname Lastname form" placeholder="Your Name" required="" value="<%=oldInput.name%>">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="number" class="form-control" name="age" id="age" placeholder="Your Age" required="" value="<%=oldInput.age%>">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0" >
+                <input type="text" name="passport_id" class="form-control" id="passport_id"  pattern="[A-Z]{2}[0-9]{7}"
+                 title="Please enter AA0000000 this form" placeholder="Your Passport id" required="" value="<%=oldInput.passport_id%>">
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group mt-3 ">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="" value="<%=oldInput.email%>">
+              </div>
+              <div class="col-md-4 form-group mt-3" >
+                <input type="text" name="address" class="form-control" id="address" placeholder="Your Address" 
+                pattern="[A-Za-z]+" title="Please enter text"  required="" value="<%=oldInput.address%>">
+              </div>
+              <div class="col-md-4 form-group mt-3 ">
+                <input type="phone" class="form-control" name="phone" id="phone" placeholder="Your Phone" required="" 
+                pattern="^\+[0-9]{12}$"  title="Please enter +998 99 999 99 99 this form" value="<%=oldInput.phone%>">
+              </div>
+              
+            </div>
+                    
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+            </div>
+            
+            <div class="mt-3">
+              
+              <div class="text-center">
+                <button type="submit">Edit user info</button>
+                        
+                </div>
+            </div>
+            
+          </form>
+        </div><!-- Update form finish -->
+
+
+<!-- Delete section start -->
+ <div class="container section-title mt-3 " id="delete" data-aos="fade-up">
+    <h2>Delete</h2>
+    <p>Delete your personal information by entering your passport id</p>
+</div><!-- Delete section finish -->
+
+
+    <!-- Deletete alert start -->  
+    <div class="row">
+        <div class="col-4"></div>
+        <%if(message&&(checker==='Delete')){%>
+          <div class="alert alert-primary text-center col-4" role="alert">
+            Succesfully deleted
+            </div>
+          
+        <%}else if(!message&&(checker==='Delete')){%>
+          <div class="alert alert-danger text-center col-4" role="alert">
+            User not found
+            </div>
+          <%}%>
+           
+          <div class="col-4"></div>
+      </div>
+
+    <!-- Delete alert finish -->
+
+    <!-- Delete form start -->  
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <form action="/delete" method="post" role="form" class="php-email-form">
+          <div class="row">
+           <div class="container col-4" >
+              <input type="text" name="passport_id" pattern="[A-Z]{2}[0-9]{7}" title="Please enter AA0000000 this form" class="form-control" id="passport_id" placeholder="Your Passport id" required="">
+            </div>
+          </div>
+          <div class="text-center mt-3">
+        <button  type="submit">Delete user Info</button>
+                    </div>
+         </form>
+  
+      </div>
+    <!-- Delete form finish -->
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%-include('../views/layouts/footer.ejs')%>

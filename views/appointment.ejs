@@ -1,0 +1,215 @@
+<%-include('../views/layouts/main.ejs')%>
+
+<%-include('../views/layouts/navbar.ejs')%>
+ 
+ 
+ <section id="appointment" class="appointment section">
+      <!-- Section Title -->
+    <div class="container section-title mt-3" id="update" data-aos="fade-up">
+      <h2>Appointment</h2>
+      <p>Enter the name of the illness and your personal information, select a doctor, and schedule an appointment with them.</p>
+    </div><!-- End Section Title -->
+    
+    <div class="row">
+        <div class="col-3"></div>
+        <%if(!message&&check==='Appointment'){%>
+        <div class="alert alert-danger text-center col-6" role="alert">
+        User is not registrated
+        </div>
+        <%}else if(message&&check==='Appointment'){%>
+          <div class="alert alert-primary text-center col-6" role="alert">
+        Appointment succesfully setted and your id <b> "<%=id%>" </b>
+            </div>
+          <% }%>
+        <div class="col-3"></div>
+     </div>  
+      
+     <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <form action="/appointment" method="post" role="form" class="php-email-form">
+         <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4  form-group">
+            <input type="text" name="name" pattern="^[A-Z][a-z]+ [A-Z][a-z]+$"  title="Please name: Firstname Lastname form" class="form-control" id="name" placeholder="Your Name" required="">
+          </div>
+          
+          <div class="col-md-4 form-group mt-3 mt-md-0" >
+            <input type="text" pattern="[A-Z]{2}[0-9]{7}" title="Please enter AA0000000 this form" 
+             name="passport_id" class="form-control" id="passport_id" placeholder="Your Passport id" required="">
+          </div>
+          <div class="col-md-2"></div>
+          
+        </div>
+        
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4 form-group mt-3">
+            <input type="datetime-local" name="date" class="form-control datepicker" id="date2" placeholder="Appointment Date" required="">
+            <small id="error-messages" style="color: red; display: none;">Iltimos, faqat dushanbadan shanbagacha 9:00 dan 18:00 gacha vaqtni tanlang.</small>
+          </div>
+          
+          <script src="../functions/date.js"></script>
+          
+          
+          <div class="col-md-4 form-group mt-3">
+            <select name="enums" id="enums" class="form-select" required="">
+              <option value="">Enum</option>
+               <%  for (let i = 0; i < enums.length; i++) {%>            
+              <option value="<%=enums[i].e_name%>"><%=enums[i].e_name%></option>
+              <%}%>
+            </select>
+          </div>
+          
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4 container mt-3">
+            <select name="doctors" id="doctors" class="form-select" required="">
+           
+               <option value="">Select Doctor</option>
+               <%  for (let i = 0; i < doctors.length; i++) {%>            
+              <option value="<%=doctors[i].d_name%>"><%=doctors[i].d_name%></option>
+              <%}%>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+       
+        
+        <div class="mt-3">
+          <div class="loading">Loading</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+          <div class="text-center">
+            <button type="submit">Make an Appointment</button>
+                    
+            </div>
+        </div>
+        
+      </form>
+      
+
+    </div>
+
+
+
+
+      <!-- Section Title -->
+      <div class="container section-title mt-3" id="update" data-aos="fade-up">
+        <h2>Update</h2>
+        <p>Enter your appointment id and update time, doctor, or enum</p>
+      </div><!-- End Section Title -->
+      
+      <div class="row">
+          <div class="col-3"></div>
+          <%if(!message&&check==='Update'){%>
+          <div class="alert alert-danger text-center col-6" role="alert">
+          Appointment is not setted or cancelled 
+          </div>
+          <%}else if(message&&check==='Update'){%>
+            <div class="alert alert-primary text-center col-6" role="alert">
+          Appointment succesfully updated 
+              </div>
+            <% }%>
+          <div class="col-3"></div>
+       </div>  
+        
+       <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <form action="/editApp" method="post" role="form" class="php-email-form">
+           <div class="row">
+            <div class="col-md-2"></div>
+           <div class="col-md-4 form-group mt-3 mt-md-0" >
+              <input type="text" name="id" class="form-control" id="id" placeholder="Your Appointment id" required="" value="<%=oldInput.id%>">
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="datetime-local" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required="" >
+              <small id="error-message" style="color: red; display: none;">Iltimos, faqat dushanbadan shanbagacha 9:00 dan 18:00 gacha vaqtni tanlang.</small>
+            </div>
+            <script src="../functions/date.js"></script> 
+            <div class="col-md-2"></div>
+            
+          </div>
+          
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="enums" id="enums" class="form-select" required="">
+                <option value="">Enum</option>
+                 <%  for (let i = 0; i < enums.length; i++) {%>            
+                <option value="<%=enums[i].e_name%>"><%=enums[i].e_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div class="col-md-4 container mt-3">
+              <select name="doctors" id="doctors" class="form-select" required="">
+             
+                 <option value="">Select Doctor</option>
+                 <%  for (let i = 0; i < doctors.length; i++) {%>            
+                <option value="<%=doctors[i].d_name%>"><%=doctors[i].d_name%></option>
+                <%}%>
+              </select>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit">Update Appointment</button>
+                    
+            </div>
+            </form>
+          </div>
+          
+     
+          <!-- Delete section start -->
+ <div class="container section-title mt-3 " id="delete" data-aos="fade-up">
+  <h2>Cancel</h2>
+  <p>Cancel your appointment by entering your appointment id</p>
+</div><!-- Delete section finish -->
+
+
+  <!-- Deletete alert start -->  
+  <div class="row">
+      <div class="col-4"></div>
+      <%if(message&&(check==='Delete')){%>
+        <div class="alert alert-primary text-center col-4" role="alert">
+          Succesfully deleted
+          </div>
+        
+      <%}else if(!message&&(check==='Delete')){%>
+        <div class="alert alert-danger text-center col-4" role="alert">
+          User not found
+          </div>
+        <%}%>
+         
+        <div class="col-4"></div>
+    </div>
+
+  <!-- Delete alert finish -->
+
+  <!-- Delete form start -->  
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <form action="/cancelApp" method="post" role="form" class="php-email-form">
+        <div class="row">
+         <div class="container col-4" >
+            <input type="text" name="id"  class="form-control" id="id" placeholder="Your Appointment id" required="" value="<%=oldInput.id%>">
+          </div>
+        </div>
+        <div class="text-center mt-3">
+      <button  type="submit">Cancel appointment</button>
+                  </div>
+       </form>
+
+    </div>
+  <!-- Delete form finish -->
+        
+  
+      
+
+
+  </section><!-- /Appointment Section -->
+
+  <%-include('../views/layouts/footer.ejs')%>

@@ -1,0 +1,173 @@
+<%-include('../views/layouts/main.ejs')%>
+
+<%-include('../views/layouts/navbar.ejs')%>
+
+ <!-- Appointment Section -->
+ <section id="appointment" class="appointment section">
+ 
+
+  <div class="container">
+   <div class="row">
+    <div class="col-3">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Appointment</h2>
+        <p>Checking appointments over a certain period</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Patients</h2>
+        <p>Finding patients by their medical history</p>
+      </div>
+    </div>
+    <div class="col-3"> 
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Table</h2>
+        <p>Viewing the doctors' schedule</p>
+      </div></div>
+    <div class="col-3">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Search</h2>
+        <p>Patients without appointment</p>
+      </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-3"> 
+      
+      <form action="/search" method="post" role="form" class="php-email-form">
+        <div class="row">
+          <div class="form-group mt-6">
+            <input type="datetime-local" name="date1" class="form-control datepicker" id="date1" placeholder="Appointment Date" required="" />
+          </div>
+          <div class="form-group mt-6">
+            <input type="datetime-local" name="date2" class="form-control datepicker" id="date3" placeholder="Appointment Date" required="" />
+          </div>
+        </div>
+        <div class="mt-3 text-center">
+          <button type="submit" class="btn btn-primary" >Search</button>
+        </div>  
+      </form>
+  
+    <script src="../functions/validateDate.js"></script>
+  </div>
+    <div class="col-3">
+       <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <form action="/find" method="post" role="form" class="php-email-form">
+        <div class="row">
+          <div class="form-group mt-6">
+            <select name="enums" id="department" class="form-select" required="">
+              <option value="">Select Enum</option>
+              <% for (let i = 0; i < enums.length; i++) {%>
+                <option value="<%=enums[i].e_name%>"><%=enums[i].e_name%></option>
+              <%}%>
+             
+              
+            </select>
+          </div>
+        </div>
+        <div class="mt-3 text-center">
+          <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    <div class="col-3">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <form action="/view" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="form-group mt-6">
+              <select name="doctors" id="department" class="form-select" required="">
+                <option value="">Select Doctor</option>
+                <% for (let i = 0; i < doctors.length; i++) {%>
+                  <option value="<%=doctors[i].d_name%>"><%=doctors[i].d_name%></option>
+                <%}%>
+              </select>
+            </div>
+          </div>
+          <div class="mt-3 text-center">
+            <button type="submit" class="btn btn-primary">View</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-3">
+      <form action="/show" method="post" role="form" class="php-email-form">
+        <div class="row">
+          <div class="form-group mt-6">
+            <input type="datetime-local" name="date4" class="form-control datepicker" id="date4" placeholder="Appointment Date" required="">
+          </div>
+          <div class="form-group mt-6">
+            <input type="datetime-local" name="date5" class="form-control datepicker" id="date5" placeholder="Appointment Date" required="">
+          </div>
+        </div>
+        <div class="mt-3 text-center">
+          <button type="submit" class="btn btn-primary">Show</button>
+        </div>
+      </form>
+
+      <script src="../functions/val2.js"></script>
+    </div>
+   </div>
+   <%if(checker==='1'){%>
+   <div class="row mt-4" >
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <%  for (let i = 0; i < schedules.length; i++) {%>
+        <tr>
+          <th scope="row"><%=i+1%></th>
+          <td><%=schedules[i].name%></td>
+                 
+        </tr>
+       <%}%>
+        
+      </tbody>
+    </table>
+    
+   
+  </div>
+    <%}%>
+    <%if(checker==='2'){%>
+      <div class="row mt-4" >
+       <table class="table">
+         <thead class="thead-dark">
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Patient name</th>
+             <th scope="col">Appointment date</th>
+             <th scope="col">Enum</th>
+             <th scope="col">Doctor</th>
+            </tr>
+         </thead>
+         <tbody>
+           <%  for (let i = 0; i < schedules.length; i++) {%>
+           <tr>
+             <th scope="row"><%=i+1%></th>
+             <td><%=schedules[i].name%></td>
+             <td><%=schedules[i].date%></td>
+             <td><%=schedules[i].enums%></td>
+             <td><%=schedules[i].doctors%></td>
+                    
+           </tr>
+          <%}%>
+           
+         </tbody>
+       </table>
+       
+      
+     </div>
+       <%}%>
+   
+  </div>
+  
+
+</section>
+
+  <%-include('../views/layouts/footer.ejs')%>
