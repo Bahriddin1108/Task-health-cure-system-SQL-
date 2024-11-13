@@ -1,0 +1,39 @@
+<div class="branding d-flex align-items-center">
+
+    <div  class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="/schedules" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Schedules</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li class="dropdown active"><a href="/#hero"><span>Home</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+           <ul>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#departments">Departments</a></li>
+            <li><a href="/#doctors">Doctors</a></li>
+            <li><a href="/#contact">Contact</a></li> 
+           </ul>
+          </li>
+         <li class="dropdown active"><a href="/UserPage"><span>User info</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+          <li><a href="/Userpage#registrate">Registrate</a></li> 
+          <li><a href="/Userpage#update">Update</a></li>
+          <li><a href="/Userpage#delete">Delete</a></li>
+        </ul>
+        </li>
+          
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+           <%if(checker){%>
+      <a class="cta-btn d-none d-sm-block" href="/appointment">Appointment</a>
+ <% } %>
+    </div>
+
+  </div>
+
+</header>
